@@ -38,18 +38,17 @@ for i in range(N):
     print()
 
 # Problem 3
-from bisect import bisect
 C = int(input())
 for i in range(C):
     Caso = tuple(map(int, input().split()))
     Conj = tuple(map(int, input().split()))
     Primi = True
     j = 1
-    while j < (Caso[1]//2)+1:
+    while j <= Caso[1]:
         # Verificamos si es divisor del numero
         if Caso[1] % j == 0:
             # Verificamos si el objeto esta en el arreglo
-            if Conj[bisect(Conj,j)-1] != j:
+            if j not in Conj:
                 Primi = False
                 break
             else:
@@ -74,7 +73,17 @@ for i in range(P):
     print(str(abs(Ps2-Ps1)), 'kms')
 
 # Problem 5
-
+C = int(input())
+for k in range(C):
+    Fila = list(map(int, input().split()))
+    N = len(Fila)
+    Mov = 0
+    for i in range(N):
+        for j in range(0, N - i - 1):
+            if Fila[j] > Fila[j + 1]:
+                Fila[j], Fila[j + 1] = Fila[j + 1], Fila[j]
+                Mov += 1
+    print(Mov)
 
 
 # Problem 6

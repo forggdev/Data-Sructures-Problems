@@ -1,17 +1,22 @@
-# Problem 6
+# Problem 3
 C = int(input())
 for i in range(C):
-    Caso = tuple(sorted(map(int, input().split(', '))))
-    # Asignamos un perro a cada fila, a la izquierda el menos pesado
-    Der = Caso[-1]
-    Izq = Caso[0]
-    j, k = 1, -2
-    jaj = len(Caso)+k
-    while j != len(Caso)+k+1:
-        if Izq < Der:
-            Izq += Caso[j]
+    Caso = tuple(map(int, input().split()))
+    Conj = tuple(map(int, input().split()))
+    Primi = True
+    j = 1
+    while j <= Caso[1]:
+        # Verificamos si es divisor del numero
+        if Caso[1] % j == 0:
+            # Verificamos si el objeto esta en el arreglo
+            if j not in Conj:
+                Primi = False
+                break
+            else:
+                j += 1
+        else:
             j += 1
-        elif Izq >= Der:
-            Der += Caso[k]
-            k -= 1
-    print(abs(Izq-Der))
+    if Primi:
+        print('Es PrimiConjunto')
+    else:
+        print('No es PrimiConjunto')
