@@ -1,10 +1,4 @@
-# Funciones del binary tree:
-# insert
-# search
-# delete
-# inOrder
-
-# Problem 6: Arboles Binarios Completos
+# Problem 1: Recorrido en pre-orden
 class Node:
     def __init__(self, key):
         self.key = key
@@ -70,18 +64,23 @@ class BinarySearchTree:
         elements = []
         self._inOrderRecursively(self.root, elements)
         return elements
+
     def _inOrderRecursively(self, root, elements):
         if root:
-            if root.left and not root.right:
-                elements.append(True)
-                return False
-            elif not root.left and root.right:
-                elements.append(True)
-                return False
-            else:
-                if self._inOrderRecursively(root.left, elements):
-                    self._inOrderRecursively(root.right, elements)
-                return True
+            self._inOrderRecursively(root.left, elements)
+            elements.append(root.key)
+            self._inOrderRecursively(root.right, elements)
+
+    def preOrder(self):
+        elements = []
+        self._preOrderRecursively(self.root, elements)
+        return elements
+
+    def _preOrderRecursively(self, root, elements):
+        if root:
+            elements.append(root.key)
+            self._preOrderRecursively(root.left, elements)
+            self._preOrderRecursively(root.right, elements)
 
 
 N = int(input())
@@ -92,7 +91,7 @@ for i in range(N):
         if elem == -1:
             break
         bst.insert(elem)
-    if bst.inOrder():
-        print("no")
-    else:
-        print("completo")
+    B = bst.preOrder()
+    for elem in B:
+        print(elem, end='')
+    print()

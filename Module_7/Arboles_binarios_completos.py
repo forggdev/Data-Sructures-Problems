@@ -1,9 +1,3 @@
-# Funciones del binary tree:
-# insert
-# search
-# delete
-# inOrder
-
 # Problem 6: Arboles Binarios Completos
 class Node:
     def __init__(self, key):

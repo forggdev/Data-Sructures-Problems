@@ -15,14 +15,14 @@ def create_directory_and_files(directory_name, file_names):
             file.write("")
 
 
-directory_name = "Module_6"
+directory_name = "Module_7"
 file_names = [
-    "Turnos_en_el_consultorio",
-    "Lucha_de_los_menores",
-    "Acumulador_Obsesivo_Compulsivo",
-    "Menor_Suma_Posible",
-    "Sintetizador_digital_periodico",
-    "No_es_Josephus"
+    "Recorrido_en_pre-orden",
+    "Altura_de_un_arbol",
+    "Cantidad_de_hojas",
+    "Hijos_unicos",
+    "Dibujo_de_un_arbol",
+    "Arboles_binarios_completos"
 ]
 
 create_directory_and_files(directory_name, file_names)

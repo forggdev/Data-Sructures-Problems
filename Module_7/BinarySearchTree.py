@@ -1,10 +1,3 @@
-# Funciones del binary tree:
-# insert
-# search
-# delete
-# inOrder
-
-# Problem 6: Arboles Binarios Completos
 class Node:
     def __init__(self, key):
         self.key = key
@@ -70,29 +63,26 @@ class BinarySearchTree:
         elements = []
         self._inOrderRecursively(self.root, elements)
         return elements
+
     def _inOrderRecursively(self, root, elements):
         if root:
-            if root.left and not root.right:
-                elements.append(True)
-                return False
-            elif not root.left and root.right:
-                elements.append(True)
-                return False
-            else:
-                if self._inOrderRecursively(root.left, elements):
-                    self._inOrderRecursively(root.right, elements)
-                return True
+            self._inOrderRecursively(root.left, elements)
+            elements.append(root.key)
+            self._inOrderRecursively(root.right, elements)
 
 
-N = int(input())
-for i in range(N):
-    A = tuple(map(int, input().split()))
-    bst = BinarySearchTree()
-    for elem in A:
-        if elem == -1:
-            break
-        bst.insert(elem)
-    if bst.inOrder():
-        print("no")
-    else:
-        print("completo")
+# Ejemplo de aplicacion
+bst = BinarySearchTree()
+bst.insert(10)
+bst.insert(5)
+bst.insert(15)
+bst.insert(3)
+bst.insert(7)
+
+print(bst.search(7))  # True
+print(bst.search(9))  # False
+
+print(bst.inOrder())  # [3, 5, 7, 10, 15]
+
+bst.delete(5)
+print(bst.inOrder())  # [3, 7, 10, 15]

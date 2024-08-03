@@ -1,15 +1,10 @@
-# Funciones del binary tree:
-# insert
-# search
-# delete
-# inOrder
-
-# Problem 6: Arboles Binarios Completos
+# Problem 5: Dibujo de un arbol
 class Node:
-    def __init__(self, key):
+    def __init__(self, key, height):
         self.key = key
         self.left = None
         self.right = None
+        self.height = height
 
 
 class BinarySearchTree:
@@ -17,15 +12,15 @@ class BinarySearchTree:
         self.root = None
 
     def insert(self, key):
-        self.root = self._insertRecursively(self.root, key)
+        self.root = self._insertRecursively(self.root, key, 1)
 
-    def _insertRecursively(self, root, key):
+    def _insertRecursively(self, root, key, height):
         if root is None:
-            return Node(key)
+            return Node(key, height)
         if key < root.key:
-            root.left = self._insertRecursively(root.left, key)
+            root.left = self._insertRecursively(root.left, key, height+1)
         elif key > root.key:
-            root.right = self._insertRecursively(root.right, key)
+            root.right = self._insertRecursively(root.right, key, height+1)
         return root
 
     def search(self, key):
@@ -66,22 +61,17 @@ class BinarySearchTree:
             current = current.left
         return current
 
-    def inOrder(self):
+    def preOrder(self):
         elements = []
-        self._inOrderRecursively(self.root, elements)
+        self._preOrderRecursively(self.root, elements)
         return elements
-    def _inOrderRecursively(self, root, elements):
+
+    def _preOrderRecursively(self, root, elements):
         if root:
-            if root.left and not root.right:
-                elements.append(True)
-                return False
-            elif not root.left and root.right:
-                elements.append(True)
-                return False
-            else:
-                if self._inOrderRecursively(root.left, elements):
-                    self._inOrderRecursively(root.right, elements)
-                return True
+            self._preOrderRecursively(root.right, elements)
+            elements.append((root.height-1, root.key))
+            self._preOrderRecursively(root.left, elements)
+
 
 
 N = int(input())
@@ -92,7 +82,9 @@ for i in range(N):
         if elem == -1:
             break
         bst.insert(elem)
-    if bst.inOrder():
-        print("no")
-    else:
-        print("completo")
+    tre = bst.preOrder()
+    for elem in tre:
+        for j in range(elem[0]):
+            print("	    ", end='')
+        print(elem[1])
+    print()
